@@ -177,7 +177,13 @@ Steps for B2 (official flow): console.cloud.google.com → new project → APIs 
 - Postgres broker is a deliberate Phase-1 simplicity choice; Redis/RabbitMQ promotion only on measured need (interface ready).
 - No Discord, no video, no publishing yet — by design.
 - Drive adapter live-tests blocked on owner action B2.
-- If the original v2.1.0 repository surfaces, a migration task is inserted before continuing.
+- **Migration-vs-greenfield gate OPEN:** the owner reports a source archive
+  `universal-ai-creator-studio-v2.1.0.zip`; it is absent from this environment (searched
+  2026-11-15). Per audit §2.1, the ZIP must be uploaded and inspected — producing the
+  per-module MIGRATE/REFACTOR/REPLACE/DISCARD verdicts — **before** this plan is approved.
+  If reusable modules exist, a migration task is inserted here and §2's file tree adjusts;
+  if the archive confirms staleness, this plan proceeds as written on explicit owner
+  confirmation.
 
 ## 11. Rollback plan
 

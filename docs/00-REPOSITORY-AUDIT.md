@@ -36,6 +36,46 @@
 
 **This audit does NOT pretend to have reviewed the v2.1.0 source code.** No statement in any deliverable may attribute working behavior to that codebase. Every feature the spec attributes to v2.1.0 is classified **BLOCKED (source unavailable)** until the owner supplies it.
 
+### 2.1 Owner update: source archive exists — inspection PENDING (greenfield NOT finalized)
+
+The owner has stated (after reviewing this audit) that a source archive named
+**`universal-ai-creator-studio-v2.1.0.zip`** previously existed. A full search of this
+environment was performed on 2026-11-15:
+
+| Search | Command | Result |
+|---|---|---|
+| Uploads folder | `ls /tmp/arena-coding-uploads/` | Only `Universal_AI_Media_Business_OS_Arena_Master_Spec.md` — **no ZIP** |
+| All archives on disk | `find / -name "*.zip" -o -name "*.tar*" -o -name "*.7z" -o -name "*.rar" -o -name "*.tgz"` (excl. system dirs) | **None found** |
+| By project name | `find / -iname "*universal*creator*" -o -iname "*v2.1.0*" -o -iname "*faceless*"` | **None found** |
+| Home/workspace dirs | `find /home …`, `find /tmp …` | Nothing beyond this repo's docs |
+
+**Status: BLOCKED (awaiting owner upload).** The greenfield decision is **explicitly NOT
+finalized** until this archive is inspected. The audit classification of v2.1.0 features
+remains **BLOCKED (source unavailable)** — it may change to IMPLEMENTED/PARTIAL/PLANNED
+per module after inspection.
+
+**Inspection plan when the ZIP is provided** (Phase 0 work, no Phase 1 code):
+
+1. Unpack to a scratch directory; record full tree, file counts, sizes, languages.
+2. Read `README`, `CLAUDE.md`, `lessons.md`, dependency files, workflow files, prompts, YAML.
+3. Inventory every Python module (incl. `studio_core/`) with its exports and stated purpose.
+4. Compare module-by-module against the Phase 1 architecture (`01-SYSTEM-ARCHITECTURE.md`
+   §6–§7 tables: queue, coordinator, worker, storage, budget, tool registry).
+5. Attempt to run the existing test suite in an isolated venv (small deps only; no large
+   installs without justification) and record pass/fail truthfully.
+6. Scan for secrets, licences and third-party blobs before any code is reused.
+7. Produce the **migration-vs-greenfield comparison** (decision gate below): per module →
+   MIGRATE / REFACTOR / REPLACE / DISCARD with reasons and effort.
+8. Update this audit, `05-PHASE-1-IMPLEMENTATION-PLAN.md`, and the roadmap accordingly.
+
+### Migration-vs-greenfield decision gate (to be completed after ZIP inspection)
+
+| Outcome of inspection | Consequence |
+|---|---|
+| ZIP arrives, modules reusable | Phase 1 plan gains a migration step; estimated scope/complexity of `05` updated with per-module verdicts |
+| ZIP arrives, mostly stale/broken | Greenfield confirmed with documented reasons per module (DISCARD list with evidence) |
+| ZIP never arrives | Greenfield proceeds **only on explicit owner confirmation** after seeing this section |
+
 ## 3. Accessible repository state (`Zoro-buss-`)
 
 ```
@@ -121,7 +161,7 @@ All **BLOCKED (source unavailable)** — research, scripts, TTS, subtitles, asse
 
 **Unknown (requires owner):**
 
-1. **Location of the original v2.1.0 code** (another account? never pushed? local zip?) — biggest planning variable.
+1. **`universal-ai-creator-studio-v2.1.0.zip` — owner says this archive exists; it is NOT in this environment (verified by exhaustive search 2026-11-15).** Until it is uploaded and inspected (plan in audit §2.1), the migration-vs-greenfield decision stays **open** — biggest planning variable.
 2. **Google Drive account details** for the 5TB (the owner has now specified Google Drive as the storage target; OAuth client setup and quota verification remain to be done — the connected Google Drive app in this session is currently **off**).
 3. **Discord application** (bot token creation) — Phase 2, owner action.
 4. **Cloud VM signup** (Oracle or alternative) — Phase 1 deployment target, owner action.
@@ -131,7 +171,7 @@ All **BLOCKED (source unavailable)** — research, scripts, TTS, subtitles, asse
 
 | # | Blocker | Needed for | Owner action |
 |---|---|---|---|
-| B1 | v2.1.0 source repo unavailable | any "preserve existing code" work | Provide repo/zip or confirm greenfield (Phase 0 assumes greenfield) |
+| B1 | **`universal-ai-creator-studio-v2.1.0.zip` not present in this environment** (exhaustive search 2026-11-15; owner confirmed the archive exists) — greenfield decision on hold | migration-vs-greenfield gate before Phase 1 approval | **Upload the ZIP** (or provide another access route); audit §2.1 defines the inspection plan |
 | B2 | Google Drive OAuth credentials not set up | Phase 1 storage adapter live test | Create Google Cloud OAuth client (instructions in `05` §8); turn on the Drive app when ready |
 | B3 | No cloud VM account yet | Phase 1 deployment | Sign up for Oracle Always Free (or chosen provider) |
 | B4 | Discord app not created | Phase 2 | Create application + bot in Discord Developer Portal |

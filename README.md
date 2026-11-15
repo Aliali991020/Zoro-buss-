@@ -38,9 +38,12 @@ Authoritative requirements: the owner-provided
 
 ## Key facts & hard rules
 
-- **Repository audit (2026-11-15):** the claimed v2.1.0 source (`universal-ai-creator-studio` /
-  `faceless-factory`) **does not exist** on the owner's GitHub account or on disk. The accessible
-  repository contained only this README. Nothing is attributed to that unavailable codebase.
+- **Repository audit (2026-11-15):** no `universal-ai-creator-studio` / `faceless-factory`
+  repository exists on the owner's GitHub account. The accessible repository contained only
+  this README. **The owner reports a source archive `universal-ai-creator-studio-v2.1.0.zip`
+  exists — it is not present in this environment (exhaustive search). Upload pending; the
+  migration-vs-greenfield decision stays open until it is inspected (audit §2.1).** Nothing
+  is attributed to that unavailable codebase.
 - **Google Drive = storage/archives only** — never compute or rendering.
 - **GitHub Actions = temporary batch/CI only** — never a permanent server or GPU worker.
 - **No unlimited free GPU is promised** — no free 24/7 GPU exists in 2026.
